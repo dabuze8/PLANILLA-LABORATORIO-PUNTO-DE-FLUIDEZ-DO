@@ -1,302 +1,545 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio PTQ-715 - Procesos Petroquímicos</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .header {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            color: #2c3e50;
-            font-size: 2.8em;
-            margin-bottom: 15px;
-        }
-        
-        .header .subtitle {
-            color: #7f8c8d;
-            font-size: 1.3em;
-            margin-bottom: 10px;
-        }
-        
-        .header .info {
-            color: #95a5a6;
-            font-size: 1em;
-            margin-top: 15px;
-        }
-        
-        .practices-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .practice-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-top: 5px solid #3498db;
-        }
-        
-        .practice-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-        
-        .practice-card h2 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .practice-number {
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3em;
-            font-weight: bold;
-        }
-        
-        .practice-card h3 {
-            color: #34495e;
-            font-size: 1.2em;
-            margin-bottom: 15px;
-        }
-        
-        .practice-card p {
-            color: #7f8c8d;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .resources {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .resource-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
-            background: linear-gradient(135deg, #3498db, #2980b9);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .resource-link:hover {
-            background: linear-gradient(135deg, #2980b9, #21618c);
-            transform: translateX(5px);
-        }
-        
-        .resource-link.template {
-            background: linear-gradient(135deg, #27ae60, #229954);
-        }
-        
-        .resource-link.template:hover {
-            background: linear-gradient(135deg, #229954, #1e8449);
-        }
-        
-        .resource-link.github {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-        }
-        
-        .resource-link.github:hover {
-            background: linear-gradient(135deg, #2c3e50, #1a252f);
-        }
-        
-        .icon {
-            font-size: 1.2em;
-        }
-        
-        .footer {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-        
-        .footer p {
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-        
-        .footer a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        
-        .info-box {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-        }
-        
-        .info-box h3 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-        
-        .info-box ul {
-            list-style-position: inside;
-            color: #7f8c8d;
-            line-height: 1.8;
-        }
-        
-        .info-box li {
-            margin-bottom: 8px;
-        }
-        
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .practices-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Punto de Fluidez · UMSA PET-212</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{
+  --bg:#0d1117; --bg2:#161b22; --bg3:#21262d; --bg4:#30363d;
+  --border:#30363d; --border2:#484f58;
+  --text:#e6edf3; --text2:#8b949e; --text3:#6e7681;
+  --teal:#3fb950; --teal-bg:rgba(63,185,80,.12); --teal-border:rgba(63,185,80,.3);
+  --blue:#58a6ff; --blue-bg:rgba(88,166,255,.12); --blue-border:rgba(88,166,255,.3);
+  --amber:#f0883e; --amber-bg:rgba(240,136,62,.12); --amber-border:rgba(240,136,62,.3);
+  --red:#f85149; --red-bg:rgba(248,81,73,.12); --red-border:rgba(248,81,73,.3);
+  --purple:#a371f7; --purple-bg:rgba(163,113,247,.12); --purple-border:rgba(163,113,247,.3);
+  --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif;
+  --r:6px; --r2:10px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6;min-height:100vh}
+
+.header{background:var(--bg2);border-bottom:1px solid var(--border);padding:18px 32px;position:sticky;top:0;z-index:100}
+.header-badge{background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:11px;font-family:var(--mono);font-weight:500;white-space:nowrap}
+.header h1{font-size:15px;font-weight:600;color:var(--text)}
+.header p{font-size:12px;color:var(--text2);margin-top:1px}
+
+.container{max-width:1200px;margin:0 auto;padding:24px 32px}
+
+.nav-pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2)}
+.pill{background:none;border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:20px;font-size:12px;font-family:var(--mono);cursor:pointer;transition:.15s}
+.pill:hover{border-color:var(--border2);color:var(--text)}
+.pill.active{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+
+.section{margin-bottom:32px;scroll-margin-top:80px}
+.section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.section-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:var(--mono);flex-shrink:0}
+.section-title{font-size:14px;font-weight:600;color:var(--text)}
+.section-sub{font-size:11px;color:var(--text3);font-family:var(--mono)}
+
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:18px 20px;margin-bottom:12px}
+.card-title{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:12px;font-family:var(--mono)}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+
+.inp-g{display:flex;flex-direction:column;gap:4px}
+.inp-g label{font-size:11px;color:var(--text2);font-family:var(--mono)}
+.inp-g input,.inp-g select{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:7px 10px;border-radius:var(--r);font-family:var(--mono);font-size:12px;width:100%;transition:.15s}
+.inp-g input:focus,.inp-g select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(88,166,255,.12)}
+.inp-g .hint{font-size:10px;color:var(--text3)}
+
+.mc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px}
+.mc-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:4px;font-family:var(--mono)}
+.mc-val{font-family:var(--mono);font-size:18px;font-weight:600;color:var(--blue)}
+.mc-sub{font-size:10px;color:var(--text3);margin-top:3px}
+
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:600;font-family:var(--mono)}
+.b-ok{background:var(--teal-bg);border:1px solid var(--teal-border);color:var(--teal)}
+.b-warn{background:var(--amber-bg);border:1px solid var(--amber-border);color:var(--amber)}
+.b-err{background:var(--red-bg);border:1px solid var(--red-border);color:var(--red)}
+
+.preset-btns{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.pbtn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:20px;font-size:12px;font-family:var(--mono);cursor:pointer;transition:.15s}
+.pbtn:hover{border-color:var(--border2);color:var(--text)}
+.pbtn.act{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+
+.tbl-wrap{overflow-x:auto}
+table.dt{width:100%;border-collapse:collapse;font-size:12px}
+table.dt th{background:var(--bg3);color:var(--text2);font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.06em;padding:8px 12px;text-align:center;border-bottom:1px solid var(--border);font-family:var(--mono)}
+table.dt td{padding:7px 12px;border-bottom:1px solid var(--border);text-align:center;font-family:var(--mono);color:var(--text)}
+table.dt td.lbl{text-align:left;font-family:var(--sans);color:var(--text2)}
+table.dt tr:last-child td{border-bottom:none}
+table.dt tr.even td{background:rgba(255,255,255,.02)}
+
+.cw{position:relative;width:100%;height:300px}
+
+.leg{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px}
+.leg-i{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)}
+.leg-sq{display:inline-block;width:20px;height:3px;border-radius:2px}
+.leg-dot{display:inline-block;width:8px;height:8px;border-radius:50%}
+
+footer{border-top:1px solid var(--border);padding:20px 32px;text-align:center;color:var(--text3);font-size:11px;font-family:var(--mono);margin-top:32px}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🔬 Laboratorio de Procesos Petroquímicos</h1>
-            <p class="subtitle">PTQ-715 - Universidad Mayor de San Andrés</p>
-            <p class="info">
-                <strong>Docente:</strong> Ing. Daniel Burgoa Márquez<br>
-                <strong>Estudiante:</strong> Univ. Queso Escobar German
-            </p>
-        </div>
-        
-        <div class="info-box">
-            <h3>📚 Acerca de este Repositorio</h3>
-            <ul>
-                <li><strong>Dashboards Interactivos:</strong> Visualización de datos experimentales con gráficas dinámicas</li>
-                <li><strong>Plantillas de Llenado:</strong> Documentos Word completos con teoría - solo datos en <span style="background: yellow; padding: 2px 5px;">AMARILLO</span> para llenar</li>
-                <li><strong>Informes Completos:</strong> Documentación profesional con análisis detallado</li>
-                <li><strong>Acceso en Línea:</strong> Visualiza los dashboards directamente desde GitHub Pages</li>
-            </ul>
-        </div>
-        
-        <div class="practices-grid">
-            <!-- Práctica 1 -->
-            <div class="practice-card">
-                <h2>
-                    <div class="practice-number">1</div>
-                    Práctica N° 1
-                </h2>
-                <h3>Punto de Escurrimiento</h3>
-                <p>
-                    Determinación del punto de escurrimiento (cloud point) de muestras de gasolina 
-                    con diferentes concentraciones de etanol según el método ASTM D2500.
-                </p>
-                <div class="resources">
-                    <a href="./Dashboard_Ensayo1_PuntoEscurrimiento.html" class="resource-link">
-                        <span class="icon">📊</span>
-                        Ver Dashboard Interactivo
-                    </a>
-                    <a href="./Plantilla_Ensayo1_PuntoEscurrimiento.docx" class="resource-link template" download>
-                        <span class="icon">📝</span>
-                        Descargar Plantilla de Llenado
-                    </a>
-                    <a href="./Informe_Ensayo1_PuntoEscurrimiento.docx" class="resource-link template" download>
-                        <span class="icon">📄</span>
-                        Descargar Informe Completo
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Práctica 2 -->
-            <div class="practice-card">
-                <h2>
-                    <div class="practice-number">2</div>
-                    Práctica N° 2
-                </h2>
-                <h3>Punto de Fluidez</h3>
-                <p>
-                    Caracterización de materias primas mediante la determinación del punto de fluidez 
-                    (pour point) de diesel oil con diferentes contenidos de parafina según ASTM D97.
-                </p>
-                <div class="resources">
-                    <a href="./Dashboard_Ensayo2_PuntoFluidez.html" class="resource-link">
-                        <span class="icon">📊</span>
-                        Ver Dashboard Interactivo
-                    </a>
-                    <a href="./Plantilla_Ensayo2_PuntoFluidez.docx" class="resource-link template" download>
-                        <span class="icon">📝</span>
-                        Descargar Plantilla de Llenado
-                    </a>
-                    <a href="./Informe_Ensayo2_PuntoFluidez.docx" class="resource-link template" download>
-                        <span class="icon">📄</span>
-                        Descargar Informe Completo
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p><strong>🔗 Enlaces Importantes</strong></p>
-            <p>
-                <a href="https://github.com/tu-usuario/laboratorio-ptq715" target="_blank" class="resource-link github" style="display: inline-flex; margin: 10px;">
-                    <span class="icon">⭐</span>
-                    Ver en GitHub
-                </a>
-            </p>
-            <p style="margin-top: 20px;">
-                © 2024 - Laboratorio de Procesos Petroquímicos PTQ-715<br>
-                Facultad de Ingeniería - Universidad Mayor de San Andrés
-            </p>
-        </div>
+
+<header class="header">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="header-badge">PET-212</div>
+    <div>
+      <h1>Dashboard · Punto de Fluidez (Pour Point) ASTM D-97</h1>
+      <p>UMSA · Ingeniería Petrolera · Refinación del Petróleo · Ensayo N°2</p>
     </div>
+  </div>
+</header>
+
+<div class="container">
+
+<nav class="nav-pills">
+  <button class="pill active" onclick="scrollTo('s1')">1 · Muestra</button>
+  <button class="pill" onclick="scrollTo('s2')">2 · Datos enfriamiento</button>
+  <button class="pill" onclick="scrollTo('s3')">3 · Curva de enfriamiento</button>
+  <button class="pill" onclick="scrollTo('s4')">4 · Punto de fluidez</button>
+  <button class="pill" onclick="scrollTo('s5')">5 · Extrapolación</button>
+  <button class="pill" onclick="scrollTo('s6')">6 · Resumen</button>
+</nav>
+
+<!-- S1: MUESTRA -->
+<section class="section" id="s1">
+  <div class="section-hdr">
+    <div class="section-num" style="background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)">1</div>
+    <div>
+      <div class="section-title">Identificación de la muestra</div>
+      <div class="section-sub">Sistema Diesel-Parafina · 3 concentraciones para extrapolación</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cargar muestra predefinida</div>
+    <div class="preset-btns">
+      <button class="pbtn act" onclick="loadPreset('M1',this)">90% D / 10% P</button>
+      <button class="pbtn" onclick="loadPreset('M2',this)">95% D / 5% P</button>
+      <button class="pbtn" onclick="loadPreset('M3',this)">97% D / 3% P</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="g3">
+      <div class="inp-g">
+        <label>Composición Diesel (%)</label>
+        <input id="pct_d" type="number" step="1" value="90" oninput="calc()">
+      </div>
+      <div class="inp-g">
+        <label>Composición Parafina (%)</label>
+        <input id="pct_p" type="number" step="1" value="10" oninput="calc()">
+      </div>
+      <div class="inp-g">
+        <label>Procedencia diesel</label>
+        <input id="proc" value="Estación de servicio">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S2: DATOS -->
+<section class="section" id="s2">
+  <div class="section-hdr">
+    <div class="section-num" style="background:var(--teal-bg);border:1px solid var(--teal-border);color:var(--teal)">2</div>
+    <div>
+      <div class="section-title">Datos de enfriamiento — baño frío</div>
+      <div class="section-sub">Registrar temperatura muestra cada 5 minutos hasta observar punto de fluidez</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Tabla de datos (copiar del laboratorio)</div>
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th>Tiempo (min)</th>
+            <th>T hielo (°C)</th>
+            <th>T muestra (°C)</th>
+            <th>Observación</th>
+          </tr>
+        </thead>
+        <tbody id="data_tbody">
+          <tr><td>0</td><td><input type="number" step="0.1" value="-10.5" style="width:80px" oninput="updateData(0,'Th',this.value)"></td><td><input type="number" step="0.1" value="21.7" style="width:80px" oninput="updateData(0,'Tm',this.value)"></td><td style="font-size:10px">Inicio</td></tr>
+          <tr class="even"><td>5</td><td><input type="number" step="0.1" value="-9.2" style="width:80px" oninput="updateData(1,'Th',this.value)"></td><td><input type="number" step="0.1" value="19.3" style="width:80px" oninput="updateData(1,'Tm',this.value)"></td><td>—</td></tr>
+          <tr><td>10</td><td><input type="number" step="0.1" value="-8.2" style="width:80px" oninput="updateData(2,'Th',this.value)"></td><td><input type="number" step="0.1" value="16.7" style="width:80px" oninput="updateData(2,'Tm',this.value)"></td><td>—</td></tr>
+          <tr class="even"><td>15</td><td><input type="number" step="0.1" value="-7.8" style="width:80px" oninput="updateData(3,'Th',this.value)"></td><td><input type="number" step="0.1" value="15.8" style="width:80px" oninput="updateData(3,'Tm',this.value)"></td><td>—</td></tr>
+          <tr><td>20</td><td><input type="number" step="0.1" value="-8.0" style="width:80px" oninput="updateData(4,'Th',this.value)"></td><td><input type="number" step="0.1" value="14.9" style="width:80px" oninput="updateData(4,'Tm',this.value)"></td><td style="background:rgba(240,136,62,.12);font-weight:600;color:var(--amber)">FLUIDEZ</td></tr>
+          <tr class="even"><td>25</td><td><input type="number" step="0.1" value="-8.1" style="width:80px" oninput="updateData(5,'Th',this.value)"></td><td><input type="number" step="0.1" value="14.3" style="width:80px" oninput="updateData(5,'Tm',this.value)"></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:10px">
+      <button class="pbtn" onclick="addRow()">+ Agregar fila</button>
+      <button class="pbtn" onclick="removeRow()">− Quitar última fila</button>
+    </div>
+  </div>
+</section>
+
+<!-- S3: CURVA -->
+<section class="section" id="s3">
+  <div class="section-hdr">
+    <div class="section-num" style="background:var(--amber-bg);border:1px solid var(--amber-border);color:var(--amber)">3</div>
+    <div>
+      <div class="section-title">Curva de enfriamiento</div>
+      <div class="section-sub">Temperatura muestra vs tiempo · identificación del punto de fluidez</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="leg">
+      <span class="leg-i"><span class="leg-sq" style="background:#58a6ff"></span>Curva de enfriamiento</span>
+      <span class="leg-i"><span class="leg-dot" style="background:#f0883e"></span>Punto de fluidez</span>
+    </div>
+    <div class="cw">
+      <canvas id="chartCurva"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- S4: PUNTO FLUIDEZ -->
+<section class="section" id="s4">
+  <div class="section-hdr">
+    <div class="section-num" style="background:var(--purple-bg);border:1px solid var(--purple-border);color:var(--purple)">4</div>
+    <div>
+      <div class="section-title">Punto de fluidez observado</div>
+      <div class="section-sub">Temperatura más baja a la cual la muestra todavía fluye (intervalo 3°C ASTM)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="g2">
+      <div class="inp-g">
+        <label>Índice de dato con punto de fluidez</label>
+        <input id="idx_pf" type="number" step="1" value="4" oninput="calc()">
+        <div class="hint">fila de la tabla donde se observó fluidez</div>
+      </div>
+      <div class="mc" style="background:rgba(240,136,62,.08);border-color:var(--amber-border)">
+        <div class="mc-lbl">Punto de fluidez observado</div>
+        <div class="mc-val" id="pf_obs" style="font-size:24px;color:var(--amber)">—</div>
+        <div class="mc-sub">°C</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S5: EXTRAPOLACIÓN -->
+<section class="section" id="s5">
+  <div class="section-hdr">
+    <div class="section-num" style="background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue)">5</div>
+    <div>
+      <div class="section-title">Extrapolación para Diesel 100%</div>
+      <div class="section-sub">Regresión lineal: T_fluidez vs % Parafina → intercepto en 0% parafina</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Ingresar resultados de las 3 muestras</div>
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th>Muestra</th>
+            <th>% Diesel</th>
+            <th>% Parafina</th>
+            <th>T fluidez (°C)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Muestra 1</td><td>90</td><td>10</td><td><input type="number" step="0.1" id="tf1" value="14.9" style="width:80px" oninput="calcExtrap()"></td></tr>
+          <tr class="even"><td>Muestra 2</td><td>95</td><td>5</td><td><input type="number" step="0.1" id="tf2" value="9.4" style="width:80px" oninput="calcExtrap()"></td></tr>
+          <tr><td>Muestra 3</td><td>97</td><td>3</td><td><input type="number" step="0.1" id="tf3" value="5.9" style="width:80px" oninput="calcExtrap()"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="g3">
+      <div class="mc">
+        <div class="mc-lbl">Pendiente (m)</div>
+        <div class="mc-val" id="slope">—</div>
+        <div class="mc-sub">°C / % Parafina</div>
+      </div>
+      <div class="mc">
+        <div class="mc-lbl">Intercepto (b)</div>
+        <div class="mc-val" id="intercept">—</div>
+        <div class="mc-sub">°C</div>
+      </div>
+      <div class="mc" style="background:rgba(63,185,80,.08);border-color:var(--teal-border)">
+        <div class="mc-lbl">T fluidez Diesel 100%</div>
+        <div class="mc-val" id="tf_100" style="font-size:24px;color:var(--teal)">—</div>
+        <div class="mc-sub">°C (extrapolado)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="leg">
+      <span class="leg-i"><span class="leg-sq" style="background:#3fb950"></span>Regresión lineal</span>
+      <span class="leg-i"><span class="leg-dot" style="background:#58a6ff"></span>Datos experimentales</span>
+      <span class="leg-i"><span class="leg-dot" style="background:#f0883e;border:2px solid #712B13"></span>Diesel 100% extrapolado</span>
+    </div>
+    <div class="cw">
+      <canvas id="chartExtrap"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- S6: RESUMEN -->
+<section class="section" id="s6">
+  <div class="section-hdr">
+    <div class="section-num" style="background:var(--bg3);border:1px solid var(--border2);color:var(--text)">6</div>
+    <div>
+      <div class="section-title">Resumen y verificación D.S. 4718</div>
+      <div class="section-sub">Comparación con límite normativo -1°C</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="g4">
+      <div class="mc">
+        <div class="mc-lbl">Muestra analizada</div>
+        <div class="mc-val" id="res_comp" style="font-size:14px">—</div>
+      </div>
+      <div class="mc">
+        <div class="mc-lbl">T fluidez experimental</div>
+        <div class="mc-val" id="res_texp">—</div>
+        <div class="mc-sub">°C</div>
+      </div>
+      <div class="mc">
+        <div class="mc-lbl">Error vs D.S.4718 (-1°C)</div>
+        <div class="mc-val" id="res_err">—</div>
+        <div class="mc-sub">%</div>
+      </div>
+      <div class="mc">
+        <div class="mc-lbl">Cumple normativa</div>
+        <div id="res_cumple" style="margin-top:8px">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="tbl-wrap">
+      <table class="dt">
+        <thead>
+          <tr>
+            <th style="text-align:left">Parámetro</th>
+            <th>Valor</th>
+            <th>Unidad</th>
+            <th>Límite D.S. 4718</th>
+          </tr>
+        </thead>
+        <tbody id="res_tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  Dashboard de Laboratorio · Ensayo N°2: Punto de Fluidez (Pour Point) ·
+  UMSA Ingeniería Petrolera · Refinación del Petróleo PET-212 ·
+  Norma ASTM D-97 / D.S. 4718 Bolivia
+</footer>
+
+<script>
+const GC='rgba(255,255,255,0.06)', TC='#8b949e';
+
+let chartCurva=null, chartExtrap=null;
+let dataPoints=[
+  {t:0, Th:-10.5, Tm:21.7},
+  {t:5, Th:-9.2, Tm:19.3},
+  {t:10, Th:-8.2, Tm:16.7},
+  {t:15, Th:-7.8, Tm:15.8},
+  {t:20, Th:-8.0, Tm:14.9},
+  {t:25, Th:-8.1, Tm:14.3},
+];
+
+const PRESETS={
+  M1:{d:90,p:10},
+  M2:{d:95,p:5},
+  M3:{d:97,p:3},
+};
+
+function scrollTo(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+function loadPreset(k,btn){
+  const p=PRESETS[k];
+  document.getElementById('pct_d').value=p.d;
+  document.getElementById('pct_p').value=p.p;
+  document.querySelectorAll('.pbtn').forEach(b=>b.classList.remove('act'));
+  btn.classList.add('act');
+  calc();
+}
+
+function updateData(idx,field,val){
+  if(field==='Th') dataPoints[idx].Th=+val;
+  if(field==='Tm') dataPoints[idx].Tm=+val;
+  calc();
+}
+
+function addRow(){
+  const lastT=dataPoints[dataPoints.length-1].t;
+  dataPoints.push({t:lastT+5,Th:0,Tm:0});
+  rebuildTable();
+  calc();
+}
+
+function removeRow(){
+  if(dataPoints.length>1){
+    dataPoints.pop();
+    rebuildTable();
+    calc();
+  }
+}
+
+function rebuildTable(){
+  const tbody=document.getElementById('data_tbody');
+  tbody.innerHTML='';
+  dataPoints.forEach((d,i)=>{
+    const tr=document.createElement('tr');
+    if(i%2)tr.className='even';
+    tr.innerHTML=`<td>${d.t}</td><td><input type="number" step="0.1" value="${d.Th.toFixed(1)}" style="width:80px" oninput="updateData(${i},'Th',this.value)"></td><td><input type="number" step="0.1" value="${d.Tm.toFixed(1)}" style="width:80px" oninput="updateData(${i},'Tm',this.value)"></td><td>${i===4?'<span style="background:rgba(240,136,62,.12);padding:2px 8px;border-radius:4px;font-weight:600;color:var(--amber)">FLUIDEZ</span>':'—'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function makeCurvaChart(){
+  chartCurva=new Chart(document.getElementById('chartCurva'),{
+    type:'line',
+    data:{
+      labels:dataPoints.map(d=>d.t),
+      datasets:[
+        {label:'T muestra',data:dataPoints.map(d=>({x:d.t,y:d.Tm})),borderColor:'#58a6ff',backgroundColor:'rgba(88,166,255,0.06)',fill:true,tension:0.3,borderWidth:2.5,pointRadius:3,parsing:false},
+        {label:'Punto fluidez',data:[{x:dataPoints[4].t,y:dataPoints[4].Tm}],borderColor:'#712B13',backgroundColor:'#f0883e',showLine:false,pointRadius:9,pointStyle:'triangle',parsing:false},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,animation:{duration:150},
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
+      scales:{
+        x:{title:{display:true,text:'Tiempo (min)',color:TC,font:{size:12}},ticks:{color:TC,font:{size:11}},grid:{color:GC}},
+        y:{title:{display:true,text:'Temperatura (°C)',color:TC,font:{size:12}},ticks:{color:TC,font:{size:11}},grid:{color:GC}}
+      }
+    }
+  });
+}
+
+function makeExtrapChart(){
+  chartExtrap=new Chart(document.getElementById('chartExtrap'),{
+    type:'scatter',
+    data:{
+      datasets:[
+        {label:'Regresión',data:[],borderColor:'#3fb950',backgroundColor:'rgba(63,185,80,0.06)',fill:false,showLine:true,borderWidth:2.5,pointRadius:0,parsing:false},
+        {label:'Datos exp.',data:[],borderColor:'#58a6ff',backgroundColor:'#58a6ff',showLine:false,pointRadius:7,pointStyle:'circle',parsing:false},
+        {label:'Diesel 100%',data:[],borderColor:'#712B13',backgroundColor:'#f0883e',showLine:false,pointRadius:9,pointStyle:'triangle',parsing:false},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,animation:{duration:150},
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.x.toFixed(1)+'% P, '+c.parsed.y.toFixed(2)+'°C'}}},
+      scales:{
+        x:{min:0,max:12,title:{display:true,text:'% Parafina (v/v)',color:TC,font:{size:12}},ticks:{color:TC,font:{size:11}},grid:{color:GC}},
+        y:{title:{display:true,text:'T fluidez (°C)',color:TC,font:{size:12}},ticks:{color:TC,font:{size:11}},grid:{color:GC}}
+      }
+    }
+  });
+}
+
+function calcExtrap(){
+  const tf1=+document.getElementById('tf1').value||14.9;
+  const tf2=+document.getElementById('tf2').value||9.4;
+  const tf3=+document.getElementById('tf3').value||5.9;
+
+  const pts=[[10,tf1],[5,tf2],[3,tf3]];
+  const n=pts.length;
+  const sumX=pts.reduce((a,p)=>a+p[0],0);
+  const sumY=pts.reduce((a,p)=>a+p[1],0);
+  const sumXY=pts.reduce((a,p)=>a+p[0]*p[1],0);
+  const sumX2=pts.reduce((a,p)=>a+p[0]*p[0],0);
+
+  const m=(n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);
+  const b=(sumY-m*sumX)/n;
+  const tf100=b;
+
+  document.getElementById('slope').textContent=m.toFixed(4);
+  document.getElementById('intercept').textContent=b.toFixed(2);
+  document.getElementById('tf_100').textContent=tf100.toFixed(2)+' °C';
+
+  // Actualizar gráfica
+  if(chartExtrap){
+    chartExtrap.data.datasets[0].data=[{x:0,y:b},{x:10,y:m*10+b}];
+    chartExtrap.data.datasets[1].data=pts.map(p=>({x:p[0],y:p[1]}));
+    chartExtrap.data.datasets[2].data=[{x:0,y:tf100}];
+    chartExtrap.update('none');
+  }
+
+  // Resumen
+  const err=Math.abs((-1-tf100)/(-1)*100);
+  document.getElementById('res_comp').textContent=document.getElementById('pct_d').value+'% D / '+document.getElementById('pct_p').value+'% P';
+  document.getElementById('res_texp').textContent=tf100.toFixed(2)+' °C';
+  document.getElementById('res_err').textContent=err.toFixed(1)+' %';
+  document.getElementById('res_cumple').innerHTML=tf100<=-1?'<span class="badge b-ok">Cumple ≤ -1°C</span>':'<span class="badge b-warn">No cumple (> -1°C)</span>';
+
+  const tbody=document.getElementById('res_tbody');
+  tbody.innerHTML='';
+  const rows=[
+    ['Composición muestra',document.getElementById('pct_d').value+'% D / '+document.getElementById('pct_p').value+'% P','—'],
+    ['T fluidez experimental',tf100.toFixed(2),'°C'],
+    ['Pendiente regresión m',m.toFixed(4),'°C/%P'],
+    ['Intercepto b (Diesel 100%)',b.toFixed(2),'°C'],
+    ['Límite D.S. 4718','≤ -1','°C'],
+    ['Error porcentual vs -1°C',err.toFixed(1),'%'],
+  ];
+  rows.forEach((r,i)=>{
+    const tr=document.createElement('tr');
+    if(i%2)tr.className='even';
+    tr.innerHTML=`<td class="lbl" style="font-weight:500">${r[0]}</td><td style="color:var(--blue)">${r[1]}</td><td style="color:var(--text3)">${r[2]}</td><td style="color:var(--text3)">${r[3]||'—'}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function calc(){
+  const idxPf=+document.getElementById('idx_pf').value||4;
+  if(idxPf>=0&&idxPf<dataPoints.length){
+    const pf=dataPoints[idxPf].Tm;
+    document.getElementById('pf_obs').textContent=pf.toFixed(1)+' °C';
+  }
+
+  if(chartCurva){
+    chartCurva.data.labels=dataPoints.map(d=>d.t);
+    chartCurva.data.datasets[0].data=dataPoints.map(d=>({x:d.t,y:d.Tm}));
+    chartCurva.data.datasets[1].data=[{x:dataPoints[idxPf].t,y:dataPoints[idxPf].Tm}];
+    chartCurva.update('none');
+  }
+
+  calcExtrap();
+}
+
+document.querySelectorAll('.pill').forEach(p=>{
+  p.addEventListener('click',()=>{
+    document.querySelectorAll('.pill').forEach(q=>q.classList.remove('active'));
+    p.classList.add('active');
+  });
+});
+
+window.addEventListener('load',()=>{
+  makeCurvaChart();
+  makeExtrapChart();
+  calc();
+});
+</script>
 </body>
 </html>
