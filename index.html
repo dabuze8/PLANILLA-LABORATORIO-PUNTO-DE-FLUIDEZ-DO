@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio PTQ-715 - Procesos Petroquímicos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+        }
+        
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .header .info {
+            color: #95a5a6;
+            font-size: 1em;
+            margin-top: 15px;
+        }
+        
+        .practices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .practice-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid #3498db;
+        }
+        
+        .practice-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .practice-card h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .practice-number {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        
+        .practice-card h3 {
+            color: #34495e;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+        
+        .practice-card p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .resources {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .resource-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .resource-link:hover {
+            background: linear-gradient(135deg, #2980b9, #21618c);
+            transform: translateX(5px);
+        }
+        
+        .resource-link.template {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+        
+        .resource-link.template:hover {
+            background: linear-gradient(135deg, #229954, #1e8449);
+        }
+        
+        .resource-link.github {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+        }
+        
+        .resource-link.github:hover {
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+        }
+        
+        .icon {
+            font-size: 1.2em;
+        }
+        
+        .footer {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .info-box h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .info-box ul {
+            list-style-position: inside;
+            color: #7f8c8d;
+            line-height: 1.8;
+        }
+        
+        .info-box li {
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .practices-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 Laboratorio de Procesos Petroquímicos</h1>
+            <p class="subtitle">PTQ-715 - Universidad Mayor de San Andrés</p>
+            <p class="info">
+                <strong>Docente:</strong> Ing. Daniel Burgoa Márquez<br>
+                <strong>Estudiante:</strong> Univ. Queso Escobar German
+            </p>
+        </div>
+        
+        <div class="info-box">
+            <h3>📚 Acerca de este Repositorio</h3>
+            <ul>
+                <li><strong>Dashboards Interactivos:</strong> Visualización de datos experimentales con gráficas dinámicas</li>
+                <li><strong>Plantillas de Llenado:</strong> Documentos Word completos con teoría - solo datos en <span style="background: yellow; padding: 2px 5px;">AMARILLO</span> para llenar</li>
+                <li><strong>Informes Completos:</strong> Documentación profesional con análisis detallado</li>
+                <li><strong>Acceso en Línea:</strong> Visualiza los dashboards directamente desde GitHub Pages</li>
+            </ul>
+        </div>
+        
+        <div class="practices-grid">
+            <!-- Práctica 1 -->
+            <div class="practice-card">
+                <h2>
+                    <div class="practice-number">1</div>
+                    Práctica N° 1
+                </h2>
+                <h3>Punto de Escurrimiento</h3>
+                <p>
+                    Determinación del punto de escurrimiento (cloud point) de muestras de gasolina 
+                    con diferentes concentraciones de etanol según el método ASTM D2500.
+                </p>
+                <div class="resources">
+                    <a href="./Dashboard_Ensayo1_PuntoEscurrimiento.html" class="resource-link">
+                        <span class="icon">📊</span>
+                        Ver Dashboard Interactivo
+                    </a>
+                    <a href="./Plantilla_Ensayo1_PuntoEscurrimiento.docx" class="resource-link template" download>
+                        <span class="icon">📝</span>
+                        Descargar Plantilla de Llenado
+                    </a>
+                    <a href="./Informe_Ensayo1_PuntoEscurrimiento.docx" class="resource-link template" download>
+                        <span class="icon">📄</span>
+                        Descargar Informe Completo
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Práctica 2 -->
+            <div class="practice-card">
+                <h2>
+                    <div class="practice-number">2</div>
+                    Práctica N° 2
+                </h2>
+                <h3>Punto de Fluidez</h3>
+                <p>
+                    Caracterización de materias primas mediante la determinación del punto de fluidez 
+                    (pour point) de diesel oil con diferentes contenidos de parafina según ASTM D97.
+                </p>
+                <div class="resources">
+                    <a href="./Dashboard_Ensayo2_PuntoFluidez.html" class="resource-link">
+                        <span class="icon">📊</span>
+                        Ver Dashboard Interactivo
+                    </a>
+                    <a href="./Plantilla_Ensayo2_PuntoFluidez.docx" class="resource-link template" download>
+                        <span class="icon">📝</span>
+                        Descargar Plantilla de Llenado
+                    </a>
+                    <a href="./Informe_Ensayo2_PuntoFluidez.docx" class="resource-link template" download>
+                        <span class="icon">📄</span>
+                        Descargar Informe Completo
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>🔗 Enlaces Importantes</strong></p>
+            <p>
+                <a href="https://github.com/tu-usuario/laboratorio-ptq715" target="_blank" class="resource-link github" style="display: inline-flex; margin: 10px;">
+                    <span class="icon">⭐</span>
+                    Ver en GitHub
+                </a>
+            </p>
+            <p style="margin-top: 20px;">
+                © 2024 - Laboratorio de Procesos Petroquímicos PTQ-715<br>
+                Facultad de Ingeniería - Universidad Mayor de San Andrés
+            </p>
+        </div>
+    </div>
+</body>
+</html>
